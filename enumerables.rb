@@ -45,16 +45,33 @@ class Array
 
   def my_flatten
 
-    if !self.is_a?(Array)
-      return [self]
-    end
+    # if !self.is_a?(Array)
+    #   return [self]
+    # end
 
     new_array = []
     self.my_each do |ele|
-      new_array += ele.my_flatten
+      if ele.is_a?(Array)
+        new_array += ele.my_flatten
+      else
+        new_array += [ele]
+      end 
     end
     return new_array
 
+  end
+
+  def my_zip(*args)
+    new_array = []
+
+    (args.length + 1).times do |arg|
+      new_array << []
+    end
+
+    (args.length + 1).times do |arg|
+      new_array[arg] << self[arg]
+    end
+    new_array
   end
 
 
@@ -69,4 +86,8 @@ end
 # p arr.my_any? { |ele| ele.even? }
 # p arr.my_all? { |ele| ele.even? }
 
-[1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten # => [1, 2, 3, 4, 5, 6, 7, 8]
+# p [1, 2, 3, [4, [5, 6]], [[[7]], 8]].my_flatten # => [1, 2, 3, 4, 5, 6, 7, 8]
+
+a = [ 4, 5, 6 ]
+b = [ 7, 8, 9 ]
+p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]

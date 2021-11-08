@@ -64,14 +64,31 @@ class Array
   def my_zip(*args)
     new_array = []
 
-    (args.length + 1).times do |arg|
-      new_array << []
+    longest = self.length
+
+    args.my_each do |sub_array|
+      if sub_array.length > longest
+        longest = sub_array.length
+      end
     end
 
-    (args.length + 1).times do |arg|
-      new_array[arg] << self[arg]
+    mapped = args.map do |sub_array|
+      sub_array.map do |ele|
+        if sub_array.length < longest
+          (longest - sub_array.length).times do |number|
+            sub_array << nil
+          end
+        else
+          ele
+        end
+      end
     end
-    new_array
+
+    mapped
+    # added = [self] + args
+    # added.transpose
+
+   
   end
 
 
@@ -90,4 +107,10 @@ end
 
 a = [ 4, 5, 6 ]
 b = [ 7, 8, 9 ]
-p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+[1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
+[1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
+
+c = [10, 11, 12]
+d = [13, 14, 15]
+[1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]

@@ -6,6 +6,7 @@ class Player
 
   def guess
     response = gets.chomp
+    self.
   end
 
   def alert_invalid_guess(string)

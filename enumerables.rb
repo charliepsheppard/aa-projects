@@ -103,15 +103,32 @@ class Array
 
     new_array = []
     if n < 0 
-      new_array << self[0...(n % self.length)] + self[(n % self.length)..-1]
+      n = self.length - n.abs
     end
     index_to_rotate = self[0...(n % self.length)]
     new_array << self[(n % self.length)..-1] + index_to_rotate
     
   end
 
+  def my_join(str = "")
+    final_str = ""
 
+    self.my_each { |ele| final_str += ele + str }
 
+    if str == ""
+      return final_str
+    end
+
+    final_str[0...-1]
+  end
+
+  def my_reverse
+    new_array = []
+    
+    self.my_each { |ele| new_array.unshift(ele) }
+
+    new_array
+  end
 
 
 end
@@ -136,8 +153,16 @@ end
 # p [1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]
 
 
-a = [ "a", "b", "c", "d" ]
-# p a.my_rotate         #=> ["b", "c", "d", "a"]
-# p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
-# a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
-p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+# a = [ "a", "b", "c", "d" ]
+# # p a.my_rotate         #=> ["b", "c", "d", "a"]
+# # p a.my_rotate(2)      #=> ["c", "d", "a", "b"]
+# p a.my_rotate(-3)     #=> ["b", "c", "d", "a"]
+# # p a.my_rotate(15)     #=> ["d", "a", "b", "c"]
+# p a.my_rotate(-5)
+
+# a = [ "a", "b", "c", "d" ]
+# p a.my_join         # => "abcd"
+# p a.my_join("$")    # => "a$b$c$d"
+
+p [ "a", "b", "c" ].my_reverse   #=> ["c", "b", "a"]
+p [ 1 ].my_reverse               #=> [1]

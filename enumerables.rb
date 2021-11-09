@@ -73,23 +73,32 @@ class Array
     end
 
     mapped = args.map do |sub_array|
-      sub_array.map do |ele|
-        if sub_array.length < longest
-          (longest - sub_array.length).times do |number|
-            sub_array << nil
-          end
-        else
-          ele
+      if sub_array.length < longest
+        (longest - sub_array.length).times do |number|
+          sub_array << nil
         end
+      end
+      sub_array
+    end
+
+    new_self = []
+
+    self.my_each { |ele| new_self << ele }
+
+    if self.length < longest
+      (longest - self.length).times do |number|
+        new_self << nil
       end
     end
 
-    mapped
-    # added = [self] + args
-    # added.transpose
+    
+    added = [new_self] + mapped
+    added.transpose[0..self.length - 1]
 
    
   end
+
+  
 
 
 
@@ -107,10 +116,10 @@ end
 
 a = [ 4, 5, 6 ]
 b = [ 7, 8, 9 ]
-[1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
-p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
-[1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
+p [1, 2, 3].my_zip(a, b) # => [[1, 4, 7], [2, 5, 8], [3, 6, 9]]
+# p a.my_zip([1,2], [8])   # => [[4, 1, 8], [5, 2, nil], [6, nil, nil]]
+p [1, 2].my_zip(a, b)    # => [[1, 4, 7], [2, 5, 8]]
 
 c = [10, 11, 12]
 d = [13, 14, 15]
-[1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]
+p [1, 2].my_zip(a, b, c, d)    # => [[1, 4, 7, 10, 13], [2, 5, 8, 11, 14]]

@@ -10,10 +10,26 @@ class Board
 
     def populate
         alpha = ("A".."Z").to_a 
-        @grid.map! do |row|
-            row.map! do |ele|
+        # @grid.map! do |row|
+        #     row.map! do |ele|
                 
+        #     end
+        # end
+
+        total = @grid.length * 2
+        while total > 0
+          
+          value = alpha.sample
+          i = 2
+          while i > 0
+            row = rand(0...@grid.length)
+            col = rand(0...@grid.length)
+            if @grid[row][col] == nil
+              @grid[row][col] = Card.new(value)
+
+              i -= 1
             end
+          end
         end
     end
 

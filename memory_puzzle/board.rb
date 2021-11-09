@@ -1,3 +1,5 @@
+require_relative "card.rb"
+
 class Board
     # The Board is responsible for keeping track of all your Cards. 
     # You'll want a grid instance variable to contain Cards. Useful methods:
@@ -9,31 +11,44 @@ class Board
     #populate should fill the board with a set of shuffled Card pairs
 
     def populate
-        alpha = ("A".."Z").to_a 
-        # @grid.map! do |row|
-        #     row.map! do |ele|
+        total = (@grid.length ** 2) /  2
+        pair_arr = get_values(total)
+
+        @grid.map! do |row|
+            row.map! do |ele|
+                card = pair_arr.sample 
+                ele == Card.new(card)
                 
-        #     end
-        # end
-
-        total = @grid.length * 2
-        while total > 0
-          
-          value = alpha.sample
-          i = 2
-          while i > 0
-            row = rand(0...@grid.length)
-            col = rand(0...@grid.length)
-            if @grid[row][col] == nil
-              @grid[row][col] = Card.new(value)
-
-              i -= 1
             end
-          end
         end
+
+    end
+
+    def get_values(total)
+        alpha = ("A".."Z").to_a
+        values = []
+        until values.length >= total 
+            pair = alpha.sample 
+            if !values.include?(pair)
+                values.push(pair)
+            end
+        end
+        values *= 2
     end
 
     #render should print out a representation of the Board's current state
+
+    def render
+        @grid.map do |row|
+            row.map do |ele|
+                if ele.face == true 
+                    ele.value
+                else 
+                    " "
+                end 
+            end
+        end
+    end
 
     #won? should return true if all cards have been revealed.
     #reveal should reveal a Card at guessed_pos (unless it's already face-up, 
@@ -41,3 +56,14 @@ class Board
     # in which case the method should do nothing). It should also return the value of the card it 
     # revealed (you'll see why later).
 end
+
+b = Board.new
+# p b 
+
+# p b.populate 
+
+p b.get_values(8)
+
+# p b.render
+
+

@@ -3,7 +3,7 @@ class Card
 
   #Common problem: Having issues with #hide and #reveal? Try testing small.
 
-  attr_reader :value
+  attr_reader :value, :face
 
   def initialize(value)
     @value = value
@@ -18,9 +18,9 @@ class Card
     @face = true
   end
 
-  def ==(other)
-    self.value == other.value
-  end
+  # def ==(other)
+  #   self.value == other.value
+  # end
 end
 
 # b = Card.new("L")

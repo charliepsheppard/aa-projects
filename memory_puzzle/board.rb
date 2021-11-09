@@ -14,11 +14,13 @@ class Board
         total = (@grid.length ** 2) /  2
         pair_arr = get_values(total)
 
-        @grid.map! do |row|
-            row.map! do |ele|
+        (0...@grid.length).each do |row|
+            (0...@grid.length).each do |col|
                 card = pair_arr.sample 
-                ele == Card.new(card)
-                
+                # new_card = Card.new(card)
+                @grid[row][col] = Card.new(card)
+                card_index = pair_arr.index(card)
+                pair_arr.delete_at(card_index)    
             end
         end
 
@@ -50,6 +52,29 @@ class Board
         end
     end
 
+    def won?
+      @grid.flatten.all? do |ele|
+        ele.face == true
+      end
+    end
+
+    def [](pos)
+      row, col = pos
+      @grid[row][col]
+    end
+
+    def []=(pos, val)
+      row, col = pos
+      @grid[row][col] = val
+    end
+
+    def reveal(pos)
+      if self[pos].face == false
+        self[pos].reveal
+      end
+      p self.render
+    end
+
     #won? should return true if all cards have been revealed.
     #reveal should reveal a Card at guessed_pos (unless it's already face-up, 
 
@@ -60,9 +85,12 @@ end
 b = Board.new
 # p b 
 
-# p b.populate 
+b.populate 
+# p b.won?
+b.reveal([0, 0])
 
-p b.get_values(8)
+
+# p b.get_values(8)
 
 # p b.render
 

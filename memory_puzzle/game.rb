@@ -14,6 +14,7 @@ class Game
     end
 
     def play 
+        @board.populate
         until @board.won?
             @board.print
             puts "please enter a position for the card you would like to flip over"
@@ -34,18 +35,35 @@ class Game
         else 
             @guesses << pos
             self.reveal_and_print(pos)
-            self.match?(array)
+            self.match?(@guesses)
         end
     end
 
     def reveal_and_print(pos)
         @board[pos].reveal
-        @board.print
+        # @board.print
     end
 
     def match?(arr)
         first,last = arr[0], arr[1]
-        @board[first].value == @board[last].value 
+        if @board[first].value == @board[last].value 
+          puts "Congrats, you got a match!"
+          self.reset_guesses
+        else
+          self.hide_and_print(arr)
+        end
+    end
+
+    def hide_and_print(arr)
+      first, last = arr[0], arr[1]
+      @board[first].hide
+      @board[last].hide
+      # @board.print
+      self.reset_guesses
+    end
+
+    def reset_guesses
+      @guesses = []
     end
 
 

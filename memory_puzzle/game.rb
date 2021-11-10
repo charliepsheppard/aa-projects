@@ -29,7 +29,7 @@ class Game
     # and update the previous_guess variable.
 
     def make_guess(pos)
-        if @guesses.length < 2
+        if @guesses.length < 1
             @guesses << pos
             self.reveal_and_print(pos)
         else 

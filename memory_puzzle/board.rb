@@ -52,6 +52,13 @@ class Board
         end
     end
 
+    def print
+        arr = self.render
+        arr.each do |row|
+            puts row.join(" ")
+        end
+    end
+
     def won?
       @grid.flatten.all? do |ele|
         ele.face == true
@@ -82,16 +89,18 @@ class Board
     # revealed (you'll see why later).
 end
 
-b = Board.new
-# p b 
+# b = Board.new
+# # # p b 
 
-b.populate 
-# p b.won?
-b.reveal([0, 0])
+# b.populate 
+# # # p b.won?
+# # b.reveal([0, 0])
 
 
-# p b.get_values(8)
+# # p b.get_values(8)
 
 # p b.render
+
+# b.print
 
 

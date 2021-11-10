@@ -87,21 +87,95 @@ def binary_search(array, target)
   return middle if target == val
 
   if target < val
-    return middle - binary_search(array[0...middle], target)
+    binary_val = binary_search(array[0...middle], target)
+    if binary_val
+      return  binary_val
+    else 
+      nil
+    end
   else
-    return middle +  binary_search(array[middle + 1..-1], target)
+    binary_val = binary_search(array[middle..-1], target)
+    if binary_val
+      return middle + binary_val
+    else 
+      nil
+    end
   end
+end
+
+# p binary_search([1, 2, 3], 1) # => 0
+# p binary_search([2, 3, 4, 5], 3) # => 1
+# p binary_search([2, 4, 6, 8, 10], 6) # => 2
+# p binary_search([1, 3, 4, 5, 9], 5) # => 3
+# p binary_search([1, 2, 3, 4, 5, 6], 6) # => 5
+# p binary_search([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3) # => 2
+# p binary_search([1, 2, 3, 4, 5, 6], 0) # => nil
+# p binary_search([1, 2, 3, 4, 5, 7], 6) # => nil
+
+def merge_sort(arr)
+  return arr if arr.length == 1
+  mid = arr.length/2
+  left = merge_sort(arr[0...mid])
+  right =merge_sort(arr[mid..-1])
+  merge(left, right)
 
 end
 
-# middle == 3
-# val == 4
-# run binary_search
+def merge(left, right)
+  merge_arr = []
+  while left.length > 0 && right.length > 0
+    if left[0] > right[0]
+      merge_arr << right[0]
+      right.shift
+    else
+      merge_arr << left[0]
+      left.shift
+    end
+  end
 
-p binary_search([1, 2, 3], 1) # => 0
-p binary_search([2, 3, 4, 5], 3) # => 1
-p binary_search([2, 4, 6, 8, 10], 6) # => 2
-p binary_search([1, 3, 4, 5, 9], 5) # => 3
-p binary_search([1, 2, 3, 4, 5, 6], 6) # => 5
-p binary_search([1, 2, 3, 4, 5, 6], 0) # => nil
-p binary_search([1, 2, 3, 4, 5, 7], 6) # => nil
+  if left.length == 0
+    merge_arr += right
+  else
+    merge_arr += left
+  end
+
+  return merge_arr
+end
+
+
+test_arr = (1..100).to_a.sample(10)
+p test_arr
+p merge_sort(test_arr)
+
+# test_arr = [5, 4]
+# p merge_sort(test_arr)
+# test_arr = [5, 4, 1]
+# p merge_sort(test_arr)
+
+
+
+# [5, 4]
+
+# [5]     []
+
+# [4, 5]
+
+# base array length 0 or 1
+# find middle
+# left = arr[0...mid], right = arr[mid..-1]
+# mergesort(left)
+# mergesort(right)
+
+# merge(left, right)
+# new_arr
+# check if the left[0] < right[0]
+# if left is smaller new_arr << left[0]
+# left.shift
+# if right is smaller 
+# new_arr << right[0]
+# right.shift
+
+# once one array is empty, ex left is empty
+# new_arr + right
+
+# [ 4, 2, 5] [599, 123, 4112]

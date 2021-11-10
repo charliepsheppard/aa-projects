@@ -143,9 +143,11 @@ def merge(left, right)
 end
 
 
-test_arr = (1..100).to_a.sample(10)
-p test_arr
-p merge_sort(test_arr)
+# test_arr = (1..100).to_a.sample(10)
+# p test_arr
+# p merge_sort(test_arr)
+
+
 
 # test_arr = [5, 4]
 # p merge_sort(test_arr)
@@ -179,3 +181,4 @@ p merge_sort(test_arr)
 # new_arr + right
 
 # [ 4, 2, 5] [599, 123, 4112]
+

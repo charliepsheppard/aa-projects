@@ -1,3 +1,5 @@
+require 'byebug'
+
 def range(start, last)
   return [] if last < start
   [start] + range(start + 1, last)
@@ -181,4 +183,93 @@ end
 # new_arr + right
 
 # [ 4, 2, 5] [599, 123, 4112]
+
+def subsets(arr)
+  return [arr] if arr.length == 0
+  # debugger 
+  prev_sub = subsets(arr[0...-1])
+  temp_arr = []
+  prev_sub.each do |ele|
+    temp_arr << ele + [arr[-1]]
+  end
+
+  prev_sub = prev_sub + temp_arr
+end
+
+# p subsets([]) # => [[]]
+# p subsets([1]) # => [[], [1]]
+# p subsets([1, 2]) # => [[], [1], [2], [1, 2]]
+# p subsets([1, 2, 3])
+
+# [1,2,3]
+
+# prev_sub = subset([1,2])
+
+# ---------------
+# prev_sub = subset(([1]))
+
+# -----------------
+# prev_sub = subset([]) => [[]] 
+
+
+
+
+
+
+# split the array into individual arr
+# new_arr = []
+
+# [1,2,3]
+
+
+# per [ 1, 2]
+# per [1]
+# per [2]
+
+# per [1, 3]
+# per [1]
+# per [3]
+
+# per [2, 3]
+# per [2]
+# per [3]
+
+def permutations(arr)
+  return arr if arr.length == 1
+  per_arr = []
+  arr.each_with_index do |ele, i|
+    temp = permutations(arr[0...i] + arr[i+1..-1]) << ele
+    per_arr <<  temp
+  end
+  return per_arr
+end
+
+p permutations([1, 2, 3]) # => [[1, 2, 3], [1, 3, 2],
+
+[1,2,3]
+first = 1
+perms = permutations([2,3]) = [[2,3], [3,2]]
+
+total_permutations = []
+
+
+perms[0...0] = [] + first + [2,3] == 123
+perms[0...1] = [2] + first + [3] 213
+perms[0...2] = [2,3] + first + [] 231
+
+132
+312
+321
+
+------------------------
+[2,3]
+first = 2
+perms = permutations([3]) == [[3]]
+
+total_permutations = [[2,3], [3,2]]
+
+---------------------------
+[3]
+return [[3]]
+
 

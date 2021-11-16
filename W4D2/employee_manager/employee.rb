@@ -8,4 +8,12 @@ class Employee
     @salary = salary
     @boss = boss
   end
+
+  def bonus(multiplier)
+      salary * multiplier
+  end 
+
 end
+
+Shawna = Employee.new("shawna", "TA", 12000, "Darren")
+David = Employee.new("david", "TA", 10000, "Darren")

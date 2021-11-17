@@ -3,13 +3,21 @@ module Slidable
   DIAGONAL_DIRS = [[1, 1], [-1, -1], [1, -1], [-1, 1]]
 
   def moves 
-    grow_unblocked_moves_in_dir(HORIZONTAL_DIRS, DIAGONAL_DIRS)
+    possible_moves = []
+    move_dirs.each do |move|
+      row, col = move
+      if grow_unblocked_moves_in_dir(row, col)
+        possible_moves << move
+      end
+    end
+
+    possible_moves
   end
 
-  def self.horizontal_dirs
+  def horizontal_dirs
     HORIZONTAL_DIRS
   end 
-  def self.diagonal_dirs
+  def diagonal_dirs
     DIAGONAL_DIRS
   end
 
@@ -19,10 +27,11 @@ module Slidable
     raise "wrong method called"
   end
 
-  def grow_unblocked_moves_in_dir(dx, dy)
-    dx.select { |pos| self.board[pos].is_a?(NullPiece) }
-    dy.select { |pos| self.board[pos].is_a?(NullPiece) }
+  def grow_unblocked_moves_in_dir(row, col)
+    if self.board[[row, col]].is_a?(NullPiece)
+      return true
+    end
 
-    unblocked_moves = [dx, dy]
+    false
   end
 end

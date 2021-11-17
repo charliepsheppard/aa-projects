@@ -5,6 +5,6 @@ class NullPiece < Piece
 
   def initialize
     @color = ""
-    @symbol = "_"
+    @symbol = :Null
   end
 end

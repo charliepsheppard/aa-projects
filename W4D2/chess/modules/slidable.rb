@@ -6,17 +6,17 @@ module Slidable
     grow_unblocked_moves_in_dir(HORIZONTAL_DIRS, DIAGONAL_DIRS)
   end
 
+  def self.horizontal_dirs
+    HORIZONTAL_DIRS
+  end 
+  def self.diagonal_dirs
+    DIAGONAL_DIRS
+  end
+
   private
 
   def move_dirs
-    if self.symbol == :rook
-      moves[0]
-    elsif 
-      self.symbol == :bishop
-        moves[1]
-    else
-      moves.flatten
-    end
+    raise "wrong method called"
   end
 
   def grow_unblocked_moves_in_dir(dx, dy)

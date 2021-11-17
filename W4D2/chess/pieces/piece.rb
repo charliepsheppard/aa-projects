@@ -5,4 +5,9 @@ class Piece
     @board = board
     @pos = pos
   end
+
+  def symbol
+    
+    self.symbol
+  end 
 end

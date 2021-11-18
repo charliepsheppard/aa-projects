@@ -1,5 +1,5 @@
 require_relative "piece"
-class Pawn
+class Pawn < Piece
     
     def symbol
         :♙

@@ -1,6 +1,6 @@
 require_relative "piece"
 require_relative "slideable"
-class Rook
+class Rook < Piece
     include Slideable
     def symbol
         :♜

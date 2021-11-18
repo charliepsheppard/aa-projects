@@ -1,6 +1,6 @@
 require_relative "piece"
 require_relative "stepable"
-class Knight
+class Knight < Piece
     include Stepable
     def symbol
         :♘

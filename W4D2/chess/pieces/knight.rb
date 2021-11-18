@@ -1,15 +1,23 @@
 require_relative "piece"
-require_relative "slideable"
+require_relative "stepable"
 class Knight
-    include Slideable
+    include Stepable
     def symbol
-        :♜
+        :♘
     end 
 
-    private
-    def move_dirs
-        horizontal_dirs
+    protected
+    def move_diffs
+      [
+        [1, 2], 
+        [2, 1], 
+        [2, -1], 
+        [1, -2], 
+        [-1, -2], 
+        [-2, -1], 
+        [-2, 1], 
+        [-1, 2]
+                ]
     end 
 
-    
 end

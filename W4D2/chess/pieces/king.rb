@@ -1,14 +1,23 @@
 require_relative "piece"
-require_relative "slideable"
+require_relative "stepable"
 class King
-    include Slideable
+    include Stepable
     def symbol
-        :♜
+        :♔
     end 
 
-    private
-    def move_dirs
-        horizontal_dirs
+    protected
+    def move_diffs
+        [
+            [1, 1], 
+            [-1, -1], 
+            [1, -1], 
+            [-1, 1]
+            [0, 1], 
+            [-1, 0], 
+            [0, -1], 
+            [1, 0]
+        ]
     end 
 
     

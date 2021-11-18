@@ -10,4 +10,6 @@ class Piece
     
     self.symbol
   end 
+
+  
 end

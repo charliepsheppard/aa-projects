@@ -1,22 +1,27 @@
-module Stepable
-  def moves
-    # will return an array with valid pos, should consider if the pos is valid or empty?
-    self.move_diffs
-  end 
+require_relative "../filepath"
 
-  move_diffs should be array of valid moves for the piece
+module Stepable
+
+ def moves 
+    possible_moves = []
+    move_dirs.each do |move|
+      row = move[0] + pos[0]
+      col = move[1] + pos[1]
+      if row.between?(0..7) && col.between?(0..7)
+        next_pos = [row, col] 
+        possible_moves << next_pos if board[next_pos].is_a?(NullPiece)
+      else 
+        raise "outside the board range"
+      end 
+
+    end
+
+    possible_moves
+  end
+   
 
   def move_diffs
-    [
-    [1, 2], 
-    [2, 1], 
-    [2, -1], 
-    [1, -2], 
-    [-1, -2], 
-    [-2, -1], 
-    [-2, 1], 
-    [-1, 2]
-  ]
-  # to raise error if this is called, we wwant the actual move_diffs to be in the piece class
+   raise "should call move_diffs from piece"
+  
   end 
 end

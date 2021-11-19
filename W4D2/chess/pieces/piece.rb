@@ -6,6 +6,10 @@ class Piece
     @pos = pos
   end
 
+  def empty?
+    if board.none?
+  end
+
   def symbol
     
     self.symbol

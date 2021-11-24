@@ -46,9 +46,19 @@ class User
         return nil if user.nil?
         User.new(user.first)
     end
+
+    def authored_question(author_id)
+        Question.find_by_author_id(author_id)
+    end
+
+    def authored_replies(user_id)
+        Reply.find_by_user_id(user_id)
+    end
 end
 
 class Question
+
+    attr_accessor :title, :body, :users_id
 
     def initialize(ops)
         
@@ -68,7 +78,7 @@ class Question
         Question.new(user.first)
     end
 
-    def self.find_by_athor_id(author_id)
+    def self.find_by_author_id(author_id)
         question = QuestionsDataBase.instance.execute(<<-SQL, author_id)
             SELECT *
             FROM questions
@@ -77,6 +87,55 @@ class Question
 
         return nil if question.nil?
         Question.new(question.first)
+    end
+
+    def author
+        User.find_by_id(@users_id)
+    end
+
+    def replies(id)
+        Reply.find_by_question_id(id)
+    end
+end
+
+class Reply
+
+    attr_accessor :replied_id, :users_id, :reply_id
+
+    def initialize(ops)
+        @replied_id = ops['replied_id']
+        @users_id = ops['users_id']  
+        @reply_id = ops['reply_id']
+    end
+
+    def self.find_by_user_id(user_id)
+        user = QuestionsDataBase.instance.execute(<<-SQL, user_id)
+            SELECT *
+            FROM replies
+            WHERE users_id = ?;
+        SQL
+
+        return nil if user.nil?
+        Reply.new(user.first)
+    end
+
+    def self.find_by_question_id(question_id)
+        question = QuestionsDataBase.instance.execute(<<-SQL, question_id)
+            SELECT *
+            FROM replies
+            WHERE replied_id = ?
+        SQL
+
+        return nil if question.nil?
+        Reply.new(question.first)
+    end
+
+    def author
+        User.find_by_id(@users_id)
+    end
+
+    def question
+        Question.find_by_author_id(@reply_id)
     end
 end
 

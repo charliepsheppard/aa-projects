@@ -59,3 +59,15 @@ INSERT INTO
   questions (title, body, users_id) 
 VALUES
   ('Why is the sky blue?', 'Because it is!', (SELECT id FROM users WHERE fname = 'Thiago'));
+
+INSERT INTO
+  questions(title, body, users_id)
+VALUES
+  ('Is the Earth round?', 'Yes, of course it is.', (SELECT id FROM users WHERE fname = 'Charlie'));
+
+INSERT INTO
+  replies(replied_id, users_id, reply_id)
+VALUES
+  ((SELECT id FROM questions WHERE id = 1), 
+  (SELECT id FROM users WHERE fname = 'Thiago'),
+  (SELECT id FROM replies WHERE id = 1));

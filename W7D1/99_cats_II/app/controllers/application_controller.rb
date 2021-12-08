@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  
+  helper_method :current_user
+
   def current_user
     @current_user ||= User.find_by(session_token: session[:session])
   end
@@ -24,4 +27,6 @@ class ApplicationController < ActionController::Base
     session[:session_token] = nil
     @current_user = nil
   end
+
+  
 end

@@ -9,6 +9,12 @@
   </head>
 
   <body>
+    <header> 
+    <% if logged_in? %> 
+        <h3><%= "Welcome #{@username}!" %> </h3>
+    <% end %>
+
+    </header>
     <%= yield %>
   </body>
 </html>

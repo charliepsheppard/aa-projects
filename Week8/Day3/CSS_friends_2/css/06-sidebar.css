@@ -7,6 +7,7 @@
 .profile-picture {
   position: relative;
   margin-top: -5em;
+  overflow: hidden;
 }
 
 .profile-picture > a > img {
@@ -29,4 +30,9 @@
 .profile-nav > ul > li {
   border-bottom: 1px solid rgb(167, 159, 159);
   padding: .35em;
+  font-weight: 600;
+}
+
+.profile-nav > ul > li:hover {
+  background-color: rgb(196, 191, 191);
 }

@@ -1,0 +1,32 @@
+/* PHASE 0: Sidebar */
+
+.profile-picture > a {
+  display: block;
+}
+
+.profile-picture {
+  position: relative;
+  margin-top: -5em;
+}
+
+.profile-picture > a > img {
+  border-radius: 5%;
+  border: 1px solid #000;
+}
+
+.profile-info {
+  margin-top: .5em;
+}
+
+.profile-nav {
+  margin-top: 1em;
+}
+
+.profile-nav > ul > li:first-child {
+  border-top: 1px solid rgb(167, 159, 159);
+}
+
+.profile-nav > ul > li {
+  border-bottom: 1px solid rgb(167, 159, 159);
+  padding: .35em;
+}

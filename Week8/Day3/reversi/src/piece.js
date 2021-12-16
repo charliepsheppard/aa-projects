@@ -29,9 +29,10 @@ Piece.prototype.flip = function () {
  */
 Piece.prototype.toString = function () {
     if (this.color === "black" ){
-        return 'B'
+        console.log(this.color);
+        return "B";
     } else {
-        return "W"
+        return "W";
     }
 }
 // DON'T TOUCH THIS CODE

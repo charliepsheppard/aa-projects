@@ -45,17 +45,17 @@ class Clock {
 
 // const clock = new Clock();
 
-function addNumbers (nums, callback) {
-    sum = 0;
+  
+  
+  // sum = 0;
 
-    nums.forEach ((num) => {
-      console.log(num);
-      sum += num;
-      console.log(sum);
-    })
+  //   nums.forEach ((num) => {
+  //     console.log(num);
+  //     sum += num;
+  //     console.log(sum);
+  //   })
 
-    setTimeout(() => {
-      callback(sum);
-    }, 0);
+  //   setTimeout(() => {
+  //     callback(sum);
+  //   }, 0);
     
-}

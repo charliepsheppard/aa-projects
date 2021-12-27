@@ -1,11 +1,10 @@
-import './asteroid';
-import './bullet';
-import './game';
-import './gameView';
-
+const Asteroid = require('./asteroid');
+const Bullet = require('./bullet')
+const Game = require('./game');
+const GameView = require('./gameView');
 const MovingObject = require("./movingObject")
-import './ship';
-import './utils';
+const Ship = require('./ship')
+const Util = require('./utils');
 
 // const MovingObject = require("./movingObject.js");
 window.MovingObject = MovingObject;
@@ -23,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function(){
     });
     mo.draw(ctx);
     
+  const asteroid = new Asteroid({ pos: [40, 40] });
+  asteroid.draw(ctx);
 })
 
 

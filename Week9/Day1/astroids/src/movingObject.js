@@ -5,6 +5,7 @@ function MovingObject(object) {
   this.vel = object.vel;
   this.radius = object.radius;
   this.color = object.color;
+  this.game = object.game;
 }
 
 

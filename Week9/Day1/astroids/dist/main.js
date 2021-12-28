@@ -15,7 +15,7 @@
   \*************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Util = __webpack_require__(/*! ./utils */ \"./src/utils.js\");\nconst movingObject = __webpack_require__(/*! ./movingObject */ \"./src/movingObject.js\");\n\nfunction Asteroid(object) {\n  this.pos = object.pos;\n  this.vel = Util.randomVec(4);\n  this.color = '#FFC0CB';\n  this.radius = 7;\n}\n\nUtil.inherits(Asteroid, movingObject)\n\nmodule.exports = Asteroid;\n\n\n//# sourceURL=webpack:///./src/asteroid.js?");
+eval("const Util = __webpack_require__(/*! ./utils */ \"./src/utils.js\");\nconst movingObject = __webpack_require__(/*! ./movingObject */ \"./src/movingObject.js\");\n\nfunction Asteroid(object) {\n  this.pos = object.pos;\n  this.vel = Util.randomVec(4);\n  this.color = '#FFC0CB';\n  this.radius = 20;\n}\n\nUtil.inherits(Asteroid, movingObject)\n\nmodule.exports = Asteroid;\n\n\n//# sourceURL=webpack:///./src/asteroid.js?");
 
 /***/ }),
 
@@ -33,9 +33,9 @@ eval("\n\n//# sourceURL=webpack:///./src/bullet.js?");
 /*!*********************!*\
   !*** ./src/game.js ***!
   \*********************/
-/***/ (() => {
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("throw new Error(\"Module parse failed: Unexpected token (4:13)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n| \\n| function Game() {\\n>   const DIM_X;\\n|   const DIM_Y;\\n|   const NUM_ASTEROIDS;\");\n\n//# sourceURL=webpack:///./src/game.js?");
+eval("const Asteroid = __webpack_require__(/*! ./asteroid */ \"./src/asteroid.js\");\n\nfunction Game (){\n   DIM_X = 1000;\n   DIM_Y = 600;\n   NUM_ASTEROIDS = 5;\n this.asteroids = [];\n  this.addAsteroids();\n    \n}\n\nGame.prototype.addAsteroids = function() {\n    let pos;\n    let newAsteroid;\n  while(this.asteroids.length < NUM_ASTEROIDS){\n      pos = this.randomPosition();\n    newAsteroid = new Asteroid({ pos }); \n    this.asteroids.push(newAsteroid)\n  }\n}\n\nGame.prototype.randomPosition = function() {\n  return pos = [Math.floor(Math.random()*DIM_X), Math.floor(Math.random()*DIM_Y)]\n}\n\nGame.prototype.draw = function(ctx){\n    ctx.clearRect(0,0,DIM_X, DIM_Y);\n    this.asteroids.forEach(star => {\n        star.draw(ctx)\n    })\n}\n\nGame.prototype.moveObjects = function(){\n    \n\n    this.asteroids.forEach(star => {\n       \n        star.move();\n    })\n}\n\nmodule.exports = Game;\n\n//# sourceURL=webpack:///./src/game.js?");
 
 /***/ }),
 
@@ -43,9 +43,9 @@ eval("throw new Error(\"Module parse failed: Unexpected token (4:13)\\nYou may n
 /*!*************************!*\
   !*** ./src/gameView.js ***!
   \*************************/
-/***/ (() => {
+/***/ ((module) => {
 
-eval("\n\n//# sourceURL=webpack:///./src/gameView.js?");
+eval("function GameView(game, ctx){\n    this.game = game;\n    this.ctx = ctx;\n}\n\nGameView.prototype.start = function(){\n  \n    setInterval(function(){this.game.moveObjects()}.bind(this),200)\n    setInterval(function(){this.game.draw(this.ctx)}.bind(this),200)\n}\n\nmodule.exports = GameView;\n\n//# sourceURL=webpack:///./src/gameView.js?");
 
 /***/ }),
 
@@ -55,7 +55,7 @@ eval("\n\n//# sourceURL=webpack:///./src/gameView.js?");
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const Asteroid = __webpack_require__(/*! ./asteroid */ \"./src/asteroid.js\");\nconst Bullet = __webpack_require__(/*! ./bullet */ \"./src/bullet.js\")\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst GameView = __webpack_require__(/*! ./gameView */ \"./src/gameView.js\");\nconst MovingObject = __webpack_require__(/*! ./movingObject */ \"./src/movingObject.js\")\nconst Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\")\nconst Util = __webpack_require__(/*! ./utils */ \"./src/utils.js\");\n\n// const MovingObject = require(\"./movingObject.js\");\nwindow.MovingObject = MovingObject;\n// console.log('this is index')\n\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n    let canvas = document.getElementById(\"game-canvas\");\n    let ctx = canvas.getContext('2d');\n    const mo = new MovingObject({\n        pos: [30, 30],\n        vel: [10, 10],\n        radius: 5,\n        color: \"#00FF00\"\n    });\n    mo.draw(ctx);\n    \n  const asteroid = new Asteroid({ pos: [40, 40] });\n  asteroid.draw(ctx);\n})\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("const Asteroid = __webpack_require__(/*! ./asteroid */ \"./src/asteroid.js\");\nconst Bullet = __webpack_require__(/*! ./bullet */ \"./src/bullet.js\")\nconst Game = __webpack_require__(/*! ./game */ \"./src/game.js\");\nconst GameView = __webpack_require__(/*! ./gameView */ \"./src/gameView.js\");\nconst MovingObject = __webpack_require__(/*! ./movingObject */ \"./src/movingObject.js\")\nconst Ship = __webpack_require__(/*! ./ship */ \"./src/ship.js\")\nconst Util = __webpack_require__(/*! ./utils */ \"./src/utils.js\");\n\n// const MovingObject = require(\"./movingObject.js\");\nwindow.MovingObject = MovingObject;\n// console.log('this is index')\n\n\ndocument.addEventListener(\"DOMContentLoaded\", function(){\n    let canvas = document.getElementById(\"game-canvas\");\n    let ctx = canvas.getContext('2d');\n\n    const newGame = new Game()\n    \n    const newGameView = new GameView(newGame,ctx)\n    newGameView.start()\n})\n\n\n\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 

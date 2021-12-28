@@ -5,7 +5,7 @@ function Asteroid(object) {
   this.pos = object.pos;
   this.vel = Util.randomVec(4);
   this.color = '#FFC0CB';
-  this.radius = 7;
+  this.radius = 20;
 }
 
 Util.inherits(Asteroid, movingObject)

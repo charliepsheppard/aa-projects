@@ -3,7 +3,7 @@ const movingObject = require('./movingObject');
 
 function Asteroid(object) {
   this.pos = object.randomPosition();
-  this.vel = Util.randomVec(4);
+  this.vel = Util.randomVec(10);
   this.color = '#FFC0CB';
   this.radius = 20;
 }

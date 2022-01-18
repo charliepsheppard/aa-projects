@@ -10,11 +10,9 @@ function Game (){
 }
 
 Game.prototype.addAsteroids = function() {
-    let pos;
     let newAsteroid;
   while(this.asteroids.length < NUM_ASTEROIDS){
-    pos = this.randomPosition();
-    let wrapPos = this.wrap(pos)
+    
     newAsteroid = new Asteroid(this); 
     this.asteroids.push(newAsteroid)
   }

@@ -1,8 +1,10 @@
-let path = require('path');
+const path = require('path');
 
 module.exports = {
-  entry: './frontend/index.jsx',
+  context: __dirname,
+  entry: './frontend/bench_bnb.jsx',
   output: {
+    path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: './bundle.js',
   },
   module: {
